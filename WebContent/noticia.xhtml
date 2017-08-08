@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+
+<ui:composition template="/resources/template/portal.xhtml">
+
+	<ui:define name="boxNoticias">
+	<h:form>
+		<div class="grid">
+			<div class="row">
+			
+				<h1><h:outputLabel value="#{noticiaMBean.noticia.titulo}" /></h1>
+				
+				<hr/>
+				<p>
+					<h:outputLabel value="#{noticiaMBean.noticia.descricao}" />
+				</p>
+				<p>
+				Em: <i><h:outputLabel value="#{noticiaMBean.noticia.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputLabel>
+				</i>
+				</p>
+				
+				<h:commandLink action="index" value="Voltar" />
+	
+			</div>
+		</div>
+	</h:form>
+	</ui:define>
+	
+</ui:composition>
+
+</body> 
+</html>
