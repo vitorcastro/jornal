@@ -10,11 +10,11 @@ import br.unifesspa.model.Noticia;
 
 public class NoticiaRepository {
 	
-	public Noticia findById(int id) 
+	public Noticia findById(int id) throws SQLException
 	{
 		Noticia noticia = null;
 		
-		try {
+
 			
 			String sqlBusca = "SELECT * FROM noticia WHERE id = ?";
 			
@@ -31,14 +31,9 @@ public class NoticiaRepository {
 				noticia.setDescricao(result.getString("descricao"));
 				noticia.setData(result.getDate("data"));
 			}
-			
-		} catch (SQLException e) {
-			// TODO: handle exception
-		}
 
 		return noticia;
 	}
-	
 	
 	public List<Noticia> findAll()
 	{
@@ -46,7 +41,7 @@ public class NoticiaRepository {
 		
 		ConnectionFactory factory = new ConnectionFactory();
 		PreparedStatement statement = null;
-		String sqlBusca = "SELECT * FROM noticia";
+		String sqlBusca = "SELECT id,tituto,descricao,data FROM noticia";
 		
 		try {
 			statement = factory.build().prepareStatement(sqlBusca);

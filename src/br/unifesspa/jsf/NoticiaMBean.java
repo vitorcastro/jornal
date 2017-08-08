@@ -1,5 +1,6 @@
 package br.unifesspa.jsf;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,7 +22,11 @@ public class NoticiaMBean {
 	{
 		NoticiaRepository repository = new NoticiaRepository();
 		
-		this.noticia = repository.findById(this.noticia.getId());
+		try {
+			this.noticia = repository.findById(this.noticia.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return "noticia";
 	}
