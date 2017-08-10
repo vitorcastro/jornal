@@ -53,6 +53,7 @@
 						<h:panelGrid columns="2" rendered="#{usuarioMBean.loginAtivo}" >
 							<h:outputLabel value="#{usuarioMBean.login}" /><br/>
 							<h:commandLink action="#{usuarioMBean.logout}" value="Sair" />
+							<h:commandLink action="/app/index" value="Acessar area adminstrativa" />
 						</h:panelGrid>
 						<br/>
 						<h:panelGrid rendered="#{!usuarioMBean.loginAtivo}">
