@@ -20,7 +20,7 @@ public class ConnectionFactory {
 	{
 		try {
 			Context initialContext = new InitialContext();
-			DataSource datasource = (DataSource)initialContext.lookup("java:/MySqlDS");
+			DataSource datasource = (DataSource)initialContext.lookup("java:/TestDS");
 			
 			if (datasource != null)
 				return datasource.getConnection();

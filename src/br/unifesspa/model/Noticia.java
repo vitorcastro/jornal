@@ -2,8 +2,18 @@ package br.unifesspa.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+@NamedQueries({
+	@NamedQuery(name="noticia.porId", query="SELECT n from Noticia n WHERE n.id = :id")
+})
+@Entity
 public class Noticia {
 
+	@Id
 	private int id;
 	private String titulo;
 	private String descricao;

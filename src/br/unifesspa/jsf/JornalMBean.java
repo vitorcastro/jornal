@@ -12,6 +12,7 @@ import br.unifesspa.model.Noticia;
 @RequestScoped
 public class JornalMBean {
 
+	
 	@ManagedProperty(value="#{noticiaMBean}")
 	private NoticiaMBean noticiaMBean;
 	
