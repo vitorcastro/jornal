@@ -10,6 +10,7 @@ import javax.faces.bean.RequestScoped;
 
 import br.unifesspa.model.Noticia;
 import br.unifesspa.persistence.NoticiaRepository;
+import br.unifesspa.persistence.PersistenceUtil;
 
 @ManagedBean
 @RequestScoped
@@ -30,7 +31,7 @@ public class NoticiaMBean {
 	
 	public String salvar()
 	{
-		NoticiaRepository repository = new NoticiaRepository();
+		NoticiaRepository repository = new NoticiaRepository(PersistenceUtil.getEntityManager());
 		
 		this.noticia.setData(new Date());
 		
@@ -44,7 +45,7 @@ public class NoticiaMBean {
 	
 	public String visualizarNoticia()
 	{
-		NoticiaRepository repository = new NoticiaRepository();
+		NoticiaRepository repository = new NoticiaRepository(PersistenceUtil.getEntityManager());
 		
 		this.noticia = repository.findByIdNamedQuery(this.noticia.getId());
 		
@@ -53,7 +54,7 @@ public class NoticiaMBean {
 	
 	public Collection<Noticia> getNoticias()
 	{
-		NoticiaRepository repository = new NoticiaRepository();
+		NoticiaRepository repository = new NoticiaRepository(PersistenceUtil.getEntityManager());
 		List<Noticia> noticias = repository.findAll();
 		
 		return noticias;
@@ -61,7 +62,7 @@ public class NoticiaMBean {
 	
 	public String remover()
 	{
-		NoticiaRepository repository = new NoticiaRepository();
+		NoticiaRepository repository = new NoticiaRepository(PersistenceUtil.getEntityManager());
 		repository.remover(this.noticia);
 		
 		this.noticia = new Noticia();
@@ -78,7 +79,7 @@ public class NoticiaMBean {
 	{
 		if (this.allNoticias.isEmpty())
 		{
-			NoticiaRepository repository = new NoticiaRepository();
+			NoticiaRepository repository = new NoticiaRepository(PersistenceUtil.getEntityManager());
 			this.allNoticias = repository.findAllTypedQuery();
 		}
 		

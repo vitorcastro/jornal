@@ -18,11 +18,15 @@ import br.unifesspa.model.Noticia;
 
 public class NoticiaRepository {
 
+	private EntityManager manager;
+	
+	public NoticiaRepository(EntityManager manager)
+	{
+		this.manager = manager;
+	}
+	
 	public void remover(Noticia noticia)
 	{
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("jornal");
-		EntityManager manager = factory.createEntityManager();
-		
 		Noticia n = manager.merge(noticia);
 		
 		manager.getTransaction().begin();  
@@ -30,73 +34,51 @@ public class NoticiaRepository {
 		manager.getTransaction().commit();
 
 		manager.close();
-		factory.close();
 	}
 	
 	public void alterar(Noticia noticia)
 	{
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("jornal");
-		EntityManager manager = factory.createEntityManager();
-		
 		manager.getTransaction().begin();  
 		manager.merge(noticia);
 		manager.getTransaction().commit();
 		
 		manager.close();
-		factory.close();
 	}
 	
 	public Noticia persist(Noticia noticia)
 	{
-		EntityManagerFactory factory = Persistence.
-				createEntityManagerFactory("jornal");
-		
-		EntityManager manager = factory.createEntityManager();
-
 		manager.getTransaction().begin();    
 		manager.persist(noticia);
 		manager.getTransaction().commit();
 		
 		manager.close();
-		factory.close();
 		
 		return noticia;
 	}
 	
 	public List<Noticia> findAllTypedQuery()
 	{
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("jornal");
-		EntityManager manager = factory.createEntityManager();
-		
 		TypedQuery<Noticia> typedQuery = manager.createQuery("SELECT n FROM Noticia n", Noticia.class);
 		List<Noticia> allNoticias = typedQuery.getResultList();
 	
 		manager.close();
-		factory.close();
 		
 		return allNoticias;
 	}
 	
 	public List<Noticia> findAllNoticias()
 	{
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("jornal");
-		EntityManager manager = factory.createEntityManager();
-		
 		Query query = manager.createQuery("SELECT n FROM Noticia n");
 	   
 		List<Noticia> resultado = query.getResultList();
 	    
 		manager.close();
-		factory.close();
 		
 	    return resultado;
 	}
 	
 	public List<Noticia> findAllCriteria()
 	{
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("jornal");
-		EntityManager manager = factory.createEntityManager();
-		
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 	    CriteriaQuery<Noticia> criteria = builder.createQuery(Noticia.class);
 	    criteria.from(Noticia.class);
@@ -105,12 +87,13 @@ public class NoticiaRepository {
 	
 	public Noticia findByIdNamedQuery(int id)
 	{
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("jornal");
-		EntityManager manager = factory.createEntityManager();
-		
-		return manager.createNamedQuery("noticia.porId", Noticia.class)
+		Noticia noticia = manager.createNamedQuery("noticia.porId", Noticia.class)
 				.setParameter("id", id)
 				.getSingleResult();
+		
+		manager.close();
+		
+		return noticia;
 	}
 	
 	public Noticia findById(int id) throws SQLException
