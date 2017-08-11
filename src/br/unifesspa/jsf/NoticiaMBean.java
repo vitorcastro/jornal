@@ -17,7 +17,6 @@ import br.unifesspa.persistence.PersistenceUtil;
 public class NoticiaMBean {
 
 	private Noticia noticia;
-	
 	private List<Noticia> allNoticias = new ArrayList<Noticia>();
 
 	public NoticiaMBean(){
@@ -39,6 +38,8 @@ public class NoticiaMBean {
 			repository.persist(noticia);
 		else 
 			repository.alterar(noticia);
+		
+		HelperJSF.adicionarMensagemSucesso("Atualização realizada com sucesso");
 		
 		return "/app/index?faces-redirect=true";
 	}
