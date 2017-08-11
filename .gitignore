@@ -1,1 +1,4 @@
-
+*.class
+.settings/*
+.tern-project
+WebContent/WEB-INF/classes/*
