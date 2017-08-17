@@ -58,7 +58,7 @@ public class NoticiaRepository {
 	
 	public List<Noticia> findAllTypedQuery()
 	{
-		TypedQuery<Noticia> typedQuery = manager.createQuery("SELECT n FROM Noticia n", Noticia.class);
+		TypedQuery<Noticia> typedQuery = manager.createQuery("SELECT n FROM Noticia n JOIN FETCH n.categoria", Noticia.class);
 		List<Noticia> allNoticias = typedQuery.getResultList();
 	
 		manager.close();

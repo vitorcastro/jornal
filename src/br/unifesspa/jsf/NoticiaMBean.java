@@ -8,7 +8,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import br.unifesspa.model.Categoria;
 import br.unifesspa.model.Noticia;
+import br.unifesspa.model.NoticiaDetalhes;
 import br.unifesspa.persistence.NoticiaRepository;
 import br.unifesspa.persistence.PersistenceUtil;
 
@@ -21,6 +23,10 @@ public class NoticiaMBean {
 
 	public NoticiaMBean(){
 		this.noticia = new Noticia();
+		this.noticia.setCategoria(new Categoria());
+		NoticiaDetalhes noticiaDetalhes = new NoticiaDetalhes(new Date()); 
+		this.noticia.setDetalhes(noticiaDetalhes);
+		noticiaDetalhes.setNoticia(this.noticia);
 	}
 	
 	public String form()
@@ -31,8 +37,6 @@ public class NoticiaMBean {
 	public String salvar()
 	{
 		NoticiaRepository repository = new NoticiaRepository(PersistenceUtil.getEntityManager());
-		
-		this.noticia.setData(new Date());
 		
 		if (this.noticia.getId() == 0)
 			repository.persist(noticia);

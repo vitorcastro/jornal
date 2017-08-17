@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Jornal - Nova Notícia</title>
+</h:head>
+
+
+<ui:composition template="/resources/template/admin.xhtml">
+
+	<ui:define name="content">
+	
+		<h:form>
+			
+			<label>Categoria</label>
+			<h:selectOneMenu value="#{categoriaMBean.categoriaBusca.id}">
+				<f:selectItems value="#{categoriaMBean.comboCategoria}"/>
+			</h:selectOneMenu>
+			
+			<h:commandButton action="#{categoriaMBean.buscar}" value="Buscar" />
+			
+			<h:dataTable styleClass="table" value="#{categoriaMBean.categoriaBusca.noticias}" var="noticia">
+		
+			<h:column>
+				<f:facet name="header">Noticia</f:facet>
+				<h:outputText value="#{noticia.titulo}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Descrição</f:facet>
+				<h:outputText value="#{noticia.descricao}" />
+			</h:column>
+		
+		
+			</h:dataTable>
+		
+		</h:form>
+	
+	
+	</ui:define>
+	
+</ui:composition>
+</html>

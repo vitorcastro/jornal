@@ -6,11 +6,13 @@
 		<non-jta-data-source>java:/TestDS</non-jta-data-source>
 		
 		<class>br.unifesspa.model.Noticia</class>
+		<class>br.unifesspa.model.Categoria</class>
+		<class>br.unifesspa.model.NoticiaDetalhes</class>
         
         <properties>
         	<property name="hibernate.show_sql" value="true" />
   	 		<property name="hibernate.format_sql" value="true" />
-  			<property name="hibernate.hbm2ddl.auto" value="create" />
+  			<property name="hibernate.hbm2ddl.auto" value="update" />
   		</properties>
 	</persistence-unit>
 	

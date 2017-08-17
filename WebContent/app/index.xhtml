@@ -17,6 +17,8 @@
 
 		<div class="grid">
 			<h:commandLink action="#{noticiaMBean.form}" value="Nova Notícia" />
+			| 
+			<h:commandLink action="#{categoriaMBean.entrarRelatorio}" value="Relatório por Categoria" />
 		</div>
 		
 		<h:dataTable styleClass="table" value="#{noticiaMBean.allNoticias}" var="noticia">
@@ -34,9 +36,22 @@
 			<h:column>
 				<f:facet name="header">Data</f:facet>
 				<h:outputText value="#{noticia.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Fortaleza"/>
+				</h:outputText>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Categoria</f:facet>
+				<h:outputText value="#{noticia.categoria.nome}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Criado em</f:facet>
+				<h:outputText value="#{noticia.detalhes.criadoEm}">
 					<f:convertDateTime pattern="dd/MM/YYYY"/>
 				</h:outputText>
 			</h:column>
+			
 			
 			<h:column>
 				<f:facet name="header"> - </f:facet>

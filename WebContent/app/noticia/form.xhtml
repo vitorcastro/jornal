@@ -26,11 +26,19 @@
 
 			<label>Detalhes</label>
 			<h:inputTextarea value="#{noticiaMBean.noticia.descricao}" />
+			
+			<label>Data</label>
+			<h:inputText value="#{noticiaMBean.noticia.data}" required="true">
+				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Fortaleza"/>
+			</h:inputText>
+			
+			<label>Categoria</label>
+			<h:selectOneMenu value="#{noticiaMBean.noticia.categoria.id}">
+				<f:selectItems value="#{categoriaMBean.comboCategoria}"/>
+			</h:selectOneMenu>
 
 			<h:inputHidden value="#{noticiaMBean.noticia.id}" />
-			<h:inputHidden value="#{noticiaMBean.noticia.data}">
-				<f:convertDateTime />
-			</h:inputHidden>
+			<h:inputHidden value="#{noticiaMBean.noticia.detalhes.id}" />
 
 			<h:commandButton action="#{noticiaMBean.salvar}" value="Salvar"/>
 		

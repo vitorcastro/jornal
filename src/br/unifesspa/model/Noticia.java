@@ -2,12 +2,19 @@ package br.unifesspa.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @NamedQueries({
 	@NamedQuery(name="noticia.porId", query="SELECT n from Noticia n WHERE n.id = :id")
@@ -20,8 +27,23 @@ public class Noticia {
 	private int id;
 	private String titulo;
 	private String descricao;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Categoria categoria;
+	
+	@OneToOne(mappedBy="noticia", cascade=CascadeType.ALL)
+	private NoticiaDetalhes detalhes;
+	
+	public NoticiaDetalhes getDetalhes() {
+		return detalhes;
+	}
+
+	public void setDetalhes(NoticiaDetalhes detalhes) {
+		this.detalhes = detalhes;
+	}
+
 	public Noticia(){}
 	
 	public Noticia(int id, String titulo, String descricao, Date data)
@@ -57,5 +79,13 @@ public class Noticia {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 }
