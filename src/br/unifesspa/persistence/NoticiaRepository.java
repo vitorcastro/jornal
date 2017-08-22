@@ -38,18 +38,18 @@ public class NoticiaRepository {
 	
 	public void alterar(Noticia noticia)
 	{
-		manager.getTransaction().begin();  
+		//manager.getTransaction().begin();  
 		manager.merge(noticia);
-		manager.getTransaction().commit();
+		//manager.getTransaction().commit();
 		
-		manager.close();
+		//manager.close();
 	}
 	
 	public Noticia persist(Noticia noticia)
 	{
-		manager.getTransaction().begin();    
+//		manager.getTransaction().begin();    
 		manager.persist(noticia);
-		manager.getTransaction().commit();
+//		manager.getTransaction().commit();
 		
 		manager.close();
 		
@@ -61,7 +61,7 @@ public class NoticiaRepository {
 		TypedQuery<Noticia> typedQuery = manager.createQuery("SELECT n FROM Noticia n JOIN FETCH n.categoria", Noticia.class);
 		List<Noticia> allNoticias = typedQuery.getResultList();
 	
-		manager.close();
+		//manager.close();
 		
 		return allNoticias;
 	}

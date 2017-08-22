@@ -22,6 +22,11 @@ public class NoticiaMBean {
 	private List<Noticia> allNoticias = new ArrayList<Noticia>();
 
 	public NoticiaMBean(){
+		this.inicializar();
+	}
+	
+	private void inicializar()
+	{
 		this.noticia = new Noticia();
 		this.noticia.setCategoria(new Categoria());
 		NoticiaDetalhes noticiaDetalhes = new NoticiaDetalhes(new Date()); 
@@ -34,9 +39,15 @@ public class NoticiaMBean {
 		return "/app/noticia/form";
 	}
 	
+	public String paginaInicial()
+	{
+		return "/app/index?faces-redirect=true";
+	}
+	
 	public String salvar()
 	{
-		NoticiaRepository repository = new NoticiaRepository(PersistenceUtil.getEntityManager());
+//		NoticiaRepository repository = new NoticiaRepository(PersistenceUtil.getEntityManager());
+		NoticiaRepository repository = new NoticiaRepository(HelperJSF.getEntityManagerInView());
 		
 		if (this.noticia.getId() == 0)
 			repository.persist(noticia);
@@ -45,7 +56,7 @@ public class NoticiaMBean {
 		
 		HelperJSF.adicionarMensagemSucesso("Atualização realizada com sucesso");
 		
-		return "/app/index?faces-redirect=true";
+		return null;
 	}
 	
 	public String visualizarNoticia()
@@ -84,7 +95,7 @@ public class NoticiaMBean {
 	{
 		if (this.allNoticias.isEmpty())
 		{
-			NoticiaRepository repository = new NoticiaRepository(PersistenceUtil.getEntityManager());
+			NoticiaRepository repository = new NoticiaRepository(HelperJSF.getEntityManagerInView());
 			this.allNoticias = repository.findAllTypedQuery();
 		}
 		
