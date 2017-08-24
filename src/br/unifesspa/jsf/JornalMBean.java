@@ -1,7 +1,5 @@
 package br.unifesspa.jsf;
 
-import java.util.Collection;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -12,12 +10,17 @@ import br.unifesspa.model.Noticia;
 @RequestScoped
 public class JornalMBean {
 
-	
 	@ManagedProperty(value="#{noticiaMBean}")
 	private NoticiaMBean noticiaMBean;
 	
-	public Collection<Noticia> getUltimasNoticias(){
-		return noticiaMBean.getNoticias();
+	private Iterable<Noticia> noticias;
+	
+	public Iterable<Noticia> getUltimasNoticias(){
+		
+		if (this.noticias == null)
+			this.noticias = noticiaMBean.getNoticias();
+		
+		return this.noticias;
 	}
 
 	public NoticiaMBean getNoticiaMBean() {

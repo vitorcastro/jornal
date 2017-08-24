@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,9 +15,11 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
+import org.jboss.resteasy.core.interception.InterceptorRegistryListener;
+
 import br.unifesspa.model.Noticia;
 
-public class NoticiaRepository {
+public class NoticiaRepository implements IRepository {
 
 	private EntityManager manager;
 	
